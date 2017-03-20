@@ -1,6 +1,10 @@
 class Article:
-    def __init__(self):
-        self.data, self.target = self.extract_data()
+    def __init__(self, filename):
+        with open(filename, "r") as f:
+            print(f.read)
 
-    def extract_data(self):
-        return (["key", "word"], [1, 0])
+    def get_text(self):
+        return ''
+
+    def get_topics(self):
+        return ''

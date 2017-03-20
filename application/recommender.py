@@ -1,19 +1,19 @@
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import Perceptron
 
-from article import Article
+from article_processor import process_articles
 
 def get_article_data(test=False):
-    return Article()
+    return process_articles([])
 
-data_train = get_article_data()
-data_test = get_article_data(test=True)
+train_data, train_target = get_article_data()
+test_data, _ = get_article_data(test=True)
 
 vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, stop_words='english')
 
-x_train = vectorizer.fit_transform(data_train.data)
-x_test = vectorizer.transform(data_test.data)
-y_train = data_train.target
+x_train = vectorizer.fit_transform(train_data)
+x_test = vectorizer.transform(test_data)
+y_train = train_target
 
 feature_names = vectorizer.get_feature_names()
 
