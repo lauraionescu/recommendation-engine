@@ -1,10 +1,15 @@
+import json
+
+
 class Article:
-    def __init__(self, filename):
-        with open(filename, "r") as f:
-            print(f.read)
+    def __init__(self, filepath, text_keyword='text'):
+        self.text_keyword = text_keyword
+
+        with open(filepath, "r") as f:
+            self.data = json.load(f)
 
     def get_text(self):
-        return ''
+        return self.data[self.text_keyword]
 
     def get_topics(self):
         return ''
