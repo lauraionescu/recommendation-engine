@@ -1,5 +1,10 @@
 {
   "content": "Lorem ipsum dolor sit amet",
   "author": "Caesar",
-  "year": "44BC"
+  "year": "44BC",
+  "keywords": [
+    "history",
+    "latin",
+    "dummy"
+  ]
 }
