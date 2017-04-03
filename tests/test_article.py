@@ -4,7 +4,7 @@ import pytest
 from application.article import Article
 
 
-FILEPATH = os.path.dirname(os.path.abspath(__file__)) +"/datafile.json"
+FILEPATH = os.path.dirname(os.path.abspath(__file__)) +"/data/datafile.json"
 
 def test_it_extracts_text_body_from_an_article():
     article = Article(FILEPATH, text_keyword='content')
