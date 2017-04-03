@@ -17,3 +17,9 @@ def test_process_articles_extracts_text_from_fileset():
 
     assert "cow" in content[0]
     assert "is" not in content[0]
+
+
+def test_strip_html_removes_html_tags_from_text():
+    raw_text = "<html><h1>fantastic python and where to find it<p>&nbsp;</h1><img src='hello.png'/>Hi</html>"
+
+    assert article_processor.strip_html(raw_text) == "fantastic python and where to find itHi"

@@ -1,10 +1,11 @@
 import os
-import re
 
 from nltk.collocations import *
 from nltk.tokenize import RegexpTokenizer
 from nltk.corpus import stopwords
 from nltk.stem.snowball import SnowballStemmer
+
+from bs4 import BeautifulSoup
 
 from application.article import Article
 
@@ -30,3 +31,12 @@ def strip_stopwords(raw_text):
     tokens = [stemmer.stem(w) for w in tokenizer.tokenize(raw_text.lower()) if w not in set(stopwords.words('english'))]
     raw_text = ' '.join(tokens)
     return raw_text
+
+
+def strip_html(raw_text):
+    return BeautifulSoup(raw_text.replace('&nbsp;', ''), 'html.parser').get_text()
+
+
+if __name__ == '__main__':
+    import sys
+    process_articles(sys.argv[1], 'body', 'channel_ids')
