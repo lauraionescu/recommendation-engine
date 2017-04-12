@@ -6,7 +6,7 @@ from sklearn.metrics.pairwise import linear_kernel
 from application.article_processor import process_articles
 
 
-def print_best_three(article_path, similarity):
+def write_best_three(article_path, similarity, filename):
     i = 0
     for root, dr, filepath in os.walk(article_path):
         for file in filepath:
@@ -20,12 +20,23 @@ def print_best_three(article_path, similarity):
                     best_matches.append(filepath[j])
                 j += 1
 
-            print('max similarity: ')
-            print(best_three)
+            with (open(filename, "a")) as f:
+                f.write('max similarity: \n')
+                for b in best_three:
+                    f.write(str(b))
+                    f.write('\n')
 
-            print(file + ' most similar with: ')
-            print(best_matches)
-            print('.......................................')
+                f.write('\n')
+
+                f.write(file + ' most similar with: \n')
+                for m in best_matches:
+                    f.write(m)
+                    f.write('\n')
+
+                f.write('\n')
+
+                f.write('.......................................')
+                f.write('\n')
             i += 1
 
 
@@ -34,6 +45,7 @@ if __name__ == '__main__':
     article_path = sys.argv[1]
     text_keyword = sys.argv[2]
     topic_keyword = sys.argv[3]
+    results_file = sys.argv[4]
 
     (dataset, topics) = process_articles(article_path, text_keyword, topic_keyword)
 
@@ -43,4 +55,4 @@ if __name__ == '__main__':
 
     similarity = linear_kernel(x_train, x_train)
 
-    print_best_three(article_path, similarity)
+    write_best_three(article_path, similarity, results_file)
