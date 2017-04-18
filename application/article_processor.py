@@ -19,7 +19,7 @@ def process_articles(filepath, text_keyword='text', topics_keyword='topics'):
             article = Article(filepath + '/' + file, text_keyword, topics_keyword)
             text = article.get_text()
             topic = article.get_topics()
-            content.append(tokenize(text))
+            content.append(tokenize(strip_html(text)))
             topics.append(topic)
 
     return (content, topics)
