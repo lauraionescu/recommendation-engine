@@ -1,8 +1,13 @@
-web:
-  build: .
-  volumes:
-    - .:/recommendation-engine
-  links:
-    - db
-db:
-  image: mongo:3.0.2
+version: '2'
+services:
+  web:
+    build: .
+    volumes:
+      - .:/recommendation-engine
+      - ${ARTICLE_PATH}:/recommendation-engine/articles
+    links:
+      - db
+  db:
+    image: mongo:3.0.2
+    ports:
+      - "27017:27017"
