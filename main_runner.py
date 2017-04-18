@@ -1,7 +1,7 @@
 import os, sys
 
 from sklearn.feature_extraction.text import TfidfVectorizer
-from sklearn.metrics.pairwise import linear_kernel
+from sklearn.metrics.pairwise import cosine_similarity
 
 from application.article_processor import process_articles
 
@@ -42,17 +42,17 @@ def write_best_three(article_path, similarity, filename):
 
 if __name__ == '__main__':
 
-    article_path = sys.argv[1]
-    text_keyword = sys.argv[2]
-    topic_keyword = sys.argv[3]
-    results_file = sys.argv[4]
+    text_keyword = sys.argv[1]
+    topic_keyword = sys.argv[2]
+    results_file = sys.argv[3]
+    article_path = 'articles'
 
     (dataset, topics) = process_articles(article_path, text_keyword, topic_keyword)
 
-    vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, max_features=200, stop_words='english')
+    vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, ngram_range=(1,2), max_features=200, stop_words='english')
 
     x_train = vectorizer.fit_transform(dataset)
 
-    similarity = linear_kernel(x_train, x_train)
+    similarity = cosine_similarity(x_train, x_train)
 
     write_best_three(article_path, similarity, results_file)
