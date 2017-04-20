@@ -13,6 +13,12 @@ docker-compose build
 ARTICLE_PATH=<path/to/data> docker-compose run --rm web <text_keyword> <topic_keyword> results.txt
 ```
 
+with variable number of optional fields
+```
+docker-compose build
+ARTICLE_PATH=<path/to/data> docker-compose run --rm web <text_keyword> <topic_keyword> results.txt <optional_filed_1> <optional_field_n>
+```
+
 ### To run the tests
 ```
   pytest tests
