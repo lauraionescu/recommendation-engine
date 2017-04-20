@@ -46,8 +46,9 @@ if __name__ == '__main__':
     topic_keyword = sys.argv[2]
     results_file = sys.argv[3]
     article_path = 'articles'
+    optional_fields = sys.argv[4:len(sys.argv)]
 
-    (dataset, topics) = process_articles(article_path, text_keyword, topic_keyword)
+    (dataset, topics) = process_articles(article_path, text_keyword, topic_keyword, optional_fields)
 
     vectorizer = TfidfVectorizer(sublinear_tf=True, max_df=0.5, ngram_range=(1,2), max_features=200, stop_words='english')
 

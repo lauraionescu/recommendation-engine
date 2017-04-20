@@ -35,3 +35,15 @@ def test_raises_error_if_default_topic_keyword_not_found():
 
     with pytest.raises(KeyError):
         assert article.get_topics()
+
+
+def test_extract_optional_topics_when_topic_is_list():
+    article = Article(FILEPATH, topics_keyword='keywords')
+
+    assert "meta" in article.get_optional_fields(['tags'])
+
+
+def test_extract_optional_topics_when_topic_is_string():
+    article = Article(FILEPATH, topics_keyword='keywords')
+
+    assert "44BC" == article.get_optional_fields(['year'])

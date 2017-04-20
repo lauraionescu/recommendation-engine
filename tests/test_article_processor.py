@@ -11,6 +11,18 @@ def test_process_articles_extracts_topics_from_fileset():
     assert ["history", "latin", "dummy"] in topics
 
 
+def test_process_articles_extracts_optional_topics_from_fileset():
+    filespath = os.path.dirname(os.path.abspath(__file__)) +"/data"
+    content, topics = article_processor.process_articles(filespath,
+                                                        text_keyword='content',
+                                                        topics_keyword='keywords',
+                                                        optional_fields=['year', 'author'])
+
+    print(content[0])
+    assert "Elocution" in content[0]
+    assert "1926" in content[0]
+
+
 def test_process_articles_extracts_text_from_fileset():
     filespath = os.path.dirname(os.path.abspath(__file__)) +"/data"
     content, topics = article_processor.process_articles(filespath, text_keyword='content', topics_keyword='keywords')
